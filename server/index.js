@@ -5,6 +5,7 @@ import { connectToDb, disconnectToDb } from "./db.js";
 
 const app = express();
 dotenv.config();
+const PORT = process.env.PORT || 4000;
 
 // middlewares
 app.use(express.json());
@@ -22,7 +23,6 @@ app.get("/", (_, res) => {
 app.use("/user", userRouter);
 
 // listening for server
-const PORT = process.env.PORT || 4000;
 
 connectToDb().then(() => {
     app.listen(PORT, () => {
