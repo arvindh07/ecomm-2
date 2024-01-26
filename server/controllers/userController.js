@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/UserModel.js";
 import { signJwtToken } from "../token.js";
+import { COOKIE_NAME, COOKIE_OPTION } from "../constants.js";
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -21,10 +22,11 @@ export const login = async (req, res) => {
             message: "Password do not match"
         })
     }
-    const signedToken = signJwtToken(existingUser.email);
+    res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
+    const token = signJwtToken(existingUser.email);
+    res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(200).json({
-        message: "Login successful",
-        token: signedToken
+        message: "Login successful"
     })
 }
 
@@ -43,10 +45,11 @@ export const signup = async (req, res) => {
     }
     const hash_password = await bcrypt.hash(password, 10);
     const newUser = await User.create({ name, email, password: hash_password });
-    const signedToken = signJwtToken(email);
+    res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
+    const token = signJwtToken(existingUser.email);
+    res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(201).json({
-        message: "User created for " + newUser.name,
-        token: signedToken
+        message: "User created for " + newUser.name
     });
 }
 
