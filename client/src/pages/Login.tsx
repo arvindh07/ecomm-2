@@ -1,14 +1,24 @@
 import { useState } from "react"
-import { loginUser } from "../API/userApi";
+import { loginUser, registerUser } from "../API/userApi";
+import { toastMessage } from "../utils/helpers";
 
 const Login = () => {
-  const [login, setLogin] = useState<boolean>(true);
+  const [login, _] = useState<boolean>(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(formData.get("email"), formData.get("password")); 
-    loginUser(formData.get("email") as string, formData.get("password") as string);
+    if(login) {
+      loginUser(formData.get("email") as string, formData.get("password") as string);
+    } else{
+      const password = formData.get("password");
+      const confirm_password = formData.get("confirm_password");
+      if(password !== confirm_password){
+        toastMessage("err", "Passwords do not match");
+        return;
+      }
+      registerUser(formData.get("name") as string, formData.get("email") as string, formData.get("password") as string);
+    }
   }
 
   return (
