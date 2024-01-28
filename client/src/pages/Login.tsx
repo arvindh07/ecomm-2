@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { loginUser } from "../API/userApi";
 
 const Login = () => {
   const [login, setLogin] = useState<boolean>(true);
@@ -7,6 +8,7 @@ const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     console.log(formData.get("email"), formData.get("password")); 
+    loginUser(formData.get("email") as string, formData.get("password") as string);
   }
 
   return (

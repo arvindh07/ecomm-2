@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import userRouter from "./routes/userRouter.js";
 import { connectToDb, disconnectToDb } from "./db.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 4000;
 // middlewares
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cors());
 
 // default run
 app.use("/", (req, _, next) => {
