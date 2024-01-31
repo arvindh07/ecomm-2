@@ -1,15 +1,20 @@
 import { useState } from "react"
 import { loginUser, registerUser } from "../API/userApi";
 import { toastMessage } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [login, _] = useState<boolean>(true);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     if(login) {
-      loginUser(formData.get("email") as string, formData.get("password") as string);
+      const response = await loginUser(formData.get("email") as string, formData.get("password") as string);
+      if(response?.status === "Ok"){
+        navigate("/");
+      }
     } else{
       const password = formData.get("password");
       const confirm_password = formData.get("confirm_password");
@@ -17,7 +22,10 @@ const Login = () => {
         toastMessage("err", "Passwords do not match");
         return;
       }
-      registerUser(formData.get("name") as string, formData.get("email") as string, formData.get("password") as string);
+      const response: any = await registerUser(formData.get("name") as string, formData.get("email") as string, formData.get("password") as string);
+      if(response?.status === "Ok"){
+        navigate("/");
+      }
     }
   }
 

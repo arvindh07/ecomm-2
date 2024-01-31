@@ -9,6 +9,7 @@ export const loginUser = async (email: string, password: string) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
             email,
             password
@@ -16,6 +17,7 @@ export const loginUser = async (email: string, password: string) => {
     });
     const json = await response.json();
     toastMessage(json?.status, json?.message);
+    return json?.status;
 }
 
 export const registerUser = async (name: string, email: string, password: string) => {
