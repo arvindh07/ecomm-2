@@ -1,7 +1,10 @@
 import express from "express";
-import { login, logout, signup } from "../controllers/userController.js";
+import { checkAuthStatus, login, logout, signup } from "../controllers/userController.js";
 
 const userRouter = express.Router();
+
+// check auth status
+userRouter.get("/auth-status", verifyToken, checkAuthStatus);
 
 // login
 userRouter.post("/login", login);

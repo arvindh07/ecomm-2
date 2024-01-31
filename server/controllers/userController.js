@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/UserModel.js";
-import { signJwtToken } from "../token.js";
-import { COOKIE_NAME, COOKIE_OPTION } from "../constants.js";
+import { signJwtToken } from "../utils/token.js";
+import { COOKIE_NAME, COOKIE_OPTION } from "../utils/constants.js";
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -59,6 +59,10 @@ export const signup = async (req, res) => {
         status: "Ok-Register",
         message: "Registered successfully"
     });
+}
+
+export const checkAuthStatus = async (req, res) => {
+    // const cookie = req 
 }
 
 export const logout = () => {};
