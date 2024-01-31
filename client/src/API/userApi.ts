@@ -1,4 +1,4 @@
-import { API_DOMAIN, LOGIN_URL, SIGNUP_URL } from "./endpoints"
+import { API_DOMAIN, AUTH_STATUS_URL, LOGIN_URL, SIGNUP_URL } from "./endpoints"
 import { toastMessage } from "../utils/helpers";
 
 export const loginUser = async (email: string, password: string) => {
@@ -36,4 +36,9 @@ export const registerUser = async (name: string, email: string, password: string
     });
     const json = await response.json();
     toastMessage(json?.status, json?.message);
+}
+
+export const checkAuthUser = async () => {
+    const res = await fetch(API_DOMAIN + AUTH_STATUS_URL);
+    console.log(res);  
 }

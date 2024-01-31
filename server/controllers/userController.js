@@ -63,6 +63,7 @@ export const signup = async (req, res) => {
 
 export const checkAuthStatus = async (req, res) => {
     // const cookie = req 
+    res.json({status: "Ok"})
 }
 
 export const logout = () => {};
