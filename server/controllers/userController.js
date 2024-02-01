@@ -26,7 +26,7 @@ export const login = async (req, res) => {
         })
     }
     res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
-    const token = signJwtToken(existingUser.email);
+    const token = signJwtToken(existingUser.email, existingUser?.name);
     res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(200).json({
         status: "Ok",
@@ -36,7 +36,6 @@ export const login = async (req, res) => {
 
 export const signup = async (req, res) => {
     const { name, email, password } = req.body;
-    console.log(name, email, password);
     if (!name || !email || !password) {
         return res.status(400).json({
             status: "No",
@@ -53,7 +52,7 @@ export const signup = async (req, res) => {
     const hash_password = await bcrypt.hash(password, 10);
     const newUser = await User.create({ name, email, password: hash_password });
     res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
-    const token = signJwtToken(newUser.email);
+    const token = signJwtToken(newUser.email, newUser.name);
     res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(201).json({
         status: "Ok-Register",
