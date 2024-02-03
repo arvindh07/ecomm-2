@@ -12,7 +12,7 @@ const userSlice = createSlice({
             state.user = action.payload;
             return state;
         },
-        logoutUser: (state, _) => {
+        logoutUser: (state) => {
             state.isLoggedIn = false;
             state.user = null;
             return state;

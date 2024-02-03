@@ -62,29 +62,34 @@ export const signup = async (req, res) => {
 
 export const checkAuthStatus = async (req, res) => {
     // check if the token is tampered
-    const user = await User.findById(res.locals.jwtData.id);
-    if(!user){
-        return res.status(400).json({
-            status: "Not Ok",
-            message: "User not registered or Token malfunctioned"
+    try {
+        const user = await User.findById(res.locals.jwtData.id);
+        if(!user){
+            return res.status(400).json({
+                status: "Not Ok",
+                message: "User not registered or Token malfunctioned"
+            })
+        }
+        // find the user
+        if(user._id.toString() !== res.locals.jwtData.id){
+            return res.status(400).json({
+                status: "Not Ok",
+                message: "Permissions didnt match"
+            })
+        }
+        res.status(200).json({
+            status: "Ok",
+            name: user.name,
+            email: user.email
         })
+    } catch (error) {
+        console.log(error, "err");
     }
-    // find the user
-    if(user._id.toString() !== res.locals.jwtData.id){
-        return res.status(400).json({
-            status: "Not Ok",
-            message: "Permissions didnt match"
-        })
-    }
-    res.status(200).json({
-        status: "Ok",
-        name: user.name,
-        email: user.email
-    })
 }
 
 export const logout = (req, res) => {
     // clear cookie
+    console.log("logout function");
     res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
     return res.status(200).json({
         status: "Ok-Logout",

@@ -1,4 +1,4 @@
-import { API_DOMAIN, AUTH_STATUS_URL, LOGIN_URL, SIGNUP_URL } from "./endpoints"
+import { API_DOMAIN, AUTH_STATUS_URL, LOGIN_URL, LOGOUT_URL, SIGNUP_URL } from "./endpoints"
 import { toastMessage } from "../utils/helpers";
 
 export const loginUser = async (email: string, password: string) => {
@@ -43,4 +43,12 @@ export const checkAuthUser = async () => {
         credentials: 'include'
     }); 
     return await res.json();
+}
+
+export const logoutUser = async () => {
+    const res = await fetch(API_DOMAIN + LOGOUT_URL, {
+        credentials: 'include'
+    });
+    const json = await res.json();
+    return json;
 }

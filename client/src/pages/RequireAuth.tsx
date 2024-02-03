@@ -10,14 +10,13 @@ const RequireAuth = () => {
     const userLoggedIn = useSelector((store: StoreState) => store.userInfo?.isLoggedIn);
     const dispatch = useDispatch();
 
-    console.log(userLoggedIn);
-
     useEffect(() => {
         const callAuth = async () => {
             const res: any = await checkAuthUser();
-            console.log(res, "R"); 
             if(res?.status === "Ok"){
                 dispatch(userActions.loginUser({"email": "a@a.co"}));
+            } else{
+                dispatch(userActions.logoutUser());
             }
         };
 
