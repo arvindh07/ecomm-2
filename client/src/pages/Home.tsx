@@ -1,14 +1,6 @@
-import { useEffect } from "react"
-import Header from "../components/Header"
-import { checkAuthUser } from "../API/userApi"
-
+import Header from "../components/Header";
 
 const Home = () => {
-  useEffect(() => {
-    console.log("mno");
-    checkAuthUser();
-  }, [])
-
   return (
     <div>
       <Header />

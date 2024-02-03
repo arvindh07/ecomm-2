@@ -10,7 +10,6 @@ export const verifyJwtToken = (req,res,next) => {
     // const response = jwt.verify(token, process.env.JWT_SECRET);
     return new Promise((resolve, reject) => {
         return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
-            console.log(err, success);
             if(err){
                 reject();
                 return res.status(401).json({
@@ -18,7 +17,6 @@ export const verifyJwtToken = (req,res,next) => {
                     message: "Token Expired"
                 })
             }else{
-                console.log("TOken verification successful");
                 resolve();
                 res.locals.jwtData = success;
                 return next();
@@ -27,5 +25,4 @@ export const verifyJwtToken = (req,res,next) => {
     })
     // I need this token in the next middleware which is checkAuthStatus
     // So I need to send this, for this, we are setting this res.locals
-    next();
 }

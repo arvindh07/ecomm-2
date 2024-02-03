@@ -41,6 +41,6 @@ export const registerUser = async (name: string, email: string, password: string
 export const checkAuthUser = async () => {
     const res = await fetch(API_DOMAIN + AUTH_STATUS_URL, {
         credentials: 'include'
-    });
-    console.log(res);  
+    }); 
+    return await res.json();
 }

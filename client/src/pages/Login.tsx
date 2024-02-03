@@ -2,17 +2,22 @@ import { useState } from "react"
 import { loginUser, registerUser } from "../API/userApi";
 import { toastMessage } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userActions } from "../store/slices/userSlice";
 
 const Login = () => {
   const [login, _] = useState<boolean>(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     if(login) {
       const response = await loginUser(formData.get("email") as string, formData.get("password") as string);
-      if(response?.status === "Ok"){
+      console.log(response, "res");
+      if(response === "Ok"){
+        dispatch(userActions.loginUser({email: "a@a.co"}))
         navigate("/");
       }
     } else{
@@ -24,6 +29,7 @@ const Login = () => {
       }
       const response: any = await registerUser(formData.get("name") as string, formData.get("email") as string, formData.get("password") as string);
       if(response?.status === "Ok"){
+        dispatch(userActions.loginUser({email: "a@a.co"}))
         navigate("/");
       }
     }

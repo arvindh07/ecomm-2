@@ -62,7 +62,6 @@ export const signup = async (req, res) => {
 
 export const checkAuthStatus = async (req, res) => {
     // check if the token is tampered
-    console.log(res.locals.jwtData.id);
     const user = await User.findById(res.locals.jwtData.id);
     if(!user){
         return res.status(400).json({
@@ -71,7 +70,6 @@ export const checkAuthStatus = async (req, res) => {
         })
     }
     // find the user
-    console.log(user._id.toString(), res.locals.jwtData.id, user._id.toString() === res.locals.jwtData.id);
     if(user._id.toString() !== res.locals.jwtData.id){
         return res.status(400).json({
             status: "Not Ok",
