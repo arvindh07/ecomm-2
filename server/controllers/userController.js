@@ -26,7 +26,7 @@ export const login = async (req, res) => {
         })
     }
     res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
-    const token = signJwtToken(existingUser.email, existingUser?.name);
+    const token = signJwtToken(existingUser.email, existingUser?._id?.toString());
     res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(200).json({
         status: "Ok",
@@ -52,7 +52,7 @@ export const signup = async (req, res) => {
     const hash_password = await bcrypt.hash(password, 10);
     const newUser = await User.create({ name, email, password: hash_password });
     res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
-    const token = signJwtToken(newUser.email, newUser.name);
+    const token = signJwtToken(newUser.email, newUser._id.toString());
     res.cookie(COOKIE_NAME, token, COOKIE_OPTION);
     return res.status(201).json({
         status: "Ok-Register",
@@ -61,8 +61,28 @@ export const signup = async (req, res) => {
 }
 
 export const checkAuthStatus = async (req, res) => {
-    // const cookie = req 
-    res.json({status: "Ok"})
+    // check if the token is tampered
+    console.log(res.locals.jwtData.id);
+    const user = await User.findById(res.locals.jwtData.id);
+    if(!user){
+        return res.status(400).json({
+            status: "Not Ok",
+            message: "User not registered or Token malfunctioned"
+        })
+    }
+    // find the user
+    console.log(user._id.toString(), res.locals.jwtData.id, user._id.toString() === res.locals.jwtData.id);
+    if(user._id.toString() !== res.locals.jwtData.id){
+        return res.status(400).json({
+            status: "Not Ok",
+            message: "Permissions didnt match"
+        })
+    }
+    res.status(200).json({
+        status: "Ok",
+        name: user.name,
+        email: user.email
+    })
 }
 
 export const logout = () => {};
