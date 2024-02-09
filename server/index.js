@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
-// default run
+// default run middleware
 app.use("/", (req, _, next) => {
     console.log("method:path:", req.method, req.path);
     next();

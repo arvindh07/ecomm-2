@@ -15,7 +15,6 @@ const Login = () => {
     const formData = new FormData(e.currentTarget);
     if(login) {
       const response = await loginUser(formData.get("email") as string, formData.get("password") as string);
-      console.log(response, "res");
       if(response === "Ok"){
         dispatch(userActions.loginUser({email: "a@a.co"}))
         navigate("/");

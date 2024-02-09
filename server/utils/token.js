@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
-import { COOKIE_NAME } from "./constants.js";
+import { COOKIE_NAME, COOKIE_OPTION } from "./constants.js";
 
 export const signJwtToken = (email, id) => {
-    return jwt.sign({email, id}, process.env.JWT_SECRET);
+    return jwt.sign({email, id}, process.env.JWT_SECRET, {
+        expiresIn: "1d"
+    });
 }
 
 export const verifyJwtToken = (req,res,next) => {
@@ -13,6 +15,7 @@ export const verifyJwtToken = (req,res,next) => {
             return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {
                 if(err){
                     // reject();
+                    res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
                     return res.status(401).json({
                         status: "Not Ok",
                         message: "Token Expired"
