@@ -9,7 +9,6 @@ export const signJwtToken = (email, id) => {
 
 export const verifyJwtToken = (req,res,next) => {
     const token = req.signedCookies[`${COOKIE_NAME}`];
-    // const response = jwt.verify(token, process.env.JWT_SECRET);
     try {
         return new Promise((resolve, reject) => {
             return jwt.verify(token, process.env.JWT_SECRET, (err, success) => {

@@ -89,7 +89,11 @@ export const checkAuthStatus = async (req, res) => {
 
 export const logout = (req, res) => {
     // clear cookie
-    res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
+    // res.clearCookie(COOKIE_NAME, COOKIE_OPTION);
+    res.cookie(COOKIE_NAME, "", {
+        httpOnly: true,
+        maxAge: new Date(0)
+    })
     console.log("logout function", req.cookies);
     return res.status(200).json({
         status: "Ok-Logout",

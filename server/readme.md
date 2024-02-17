@@ -9,6 +9,14 @@
 
 - default start point to log the request method and request path
 - disconnect option of mongoose connection when server disconnects
+- for logout function, we will set the cookies maxAge to 0
+
+### clear cookie
+
+- res.cookie(COOKIE_NAME, '', {
+    httpOnly: true,
+    maxAge: new Date(0)
+})
 
 ### to be deleted:
 
