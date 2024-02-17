@@ -3,35 +3,35 @@
         "name": "Black TShirt 1",
         "price": 1000,
         "discount": 50,
-        "category": "MEN" ,
+        "category": "MEN",
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
         "name": "Black TShirt 2",
         "price": 1000,
         "discount": 50,
-        "category": "MEN" ,
+        "category": "MEN",
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
         "name": "Black TShirt 3",
         "price": 1000,
         "discount": 50,
-        "category": "MEN" ,
+        "category": "MEN",
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
         "name": "Black TShirt 4",
         "price": 1000,
         "discount": 50,
-        "category": "MEN" ,
+        "category": "MEN",
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
         "name": "Black TShirt 5",
         "price": 1000,
         "discount": 50,
-        "category": "MEN" ,
+        "category": "MEN",
         "imageUrl": "/prodImages/blacktshirt.jpg"
     }
 ]

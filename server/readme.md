@@ -10,6 +10,7 @@
 - default start point to log the request method and request path
 - disconnect option of mongoose connection when server disconnects
 - for logout function, we will set the cookies maxAge to 0
+- asserting json type, import products from "../data/products.json" assert { type: "json" };
 
 ### clear cookie
 
