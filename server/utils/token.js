@@ -3,7 +3,7 @@ import { COOKIE_NAME, COOKIE_OPTION } from "./constants.js";
 
 export const signJwtToken = (email, id) => {
     return jwt.sign({email, id}, process.env.JWT_SECRET, {
-        expiresIn: "1d"
+        expiresIn: "2d"
     });
 }
 

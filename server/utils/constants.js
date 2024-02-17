@@ -1,6 +1,6 @@
 const getExpiryDate = () => {
     const expires = new Date();
-    expires.setDate(expires.getDate() + 1);
+    expires.setDate(expires.getDate() + 2);
     return expires;
 }
 
