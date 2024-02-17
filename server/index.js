@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRouter.js";
+import productRouter from "./routes/productRouter.js";
 import { connectToDb, disconnectToDb } from "./db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -25,6 +26,7 @@ app.get("/", (_, res) => {
     return res.json({ "message": "Welcome to backend" });
 })
 app.use("/user", userRouter);
+app.use("/products", productRouter);
 
 // listening for server
 
