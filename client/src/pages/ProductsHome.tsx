@@ -1,6 +1,15 @@
+import Product from "../components/Product"
+
 const ProductsHome = () => {
   return (
-    <div>ProductsHome</div>
+    <div className="grid grid-cols-4">
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product /> 
+    </div>
   )
 }
 
