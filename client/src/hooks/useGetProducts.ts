@@ -11,7 +11,11 @@ const useGetProducts = () => {
         const res: any = await fetch(url);
         const json = await res.json();
         if(json?.status === "Ok"){
+            const menProds = json.products.filter((prod: any) => prod.category === "MEN");
+            const womenProds = json.products.filter((prod: any) => prod.category === "WOMEN");
             dispatch(productActions.addProducts(json.products));
+            dispatch(productActions.setMenProducts(menProds));
+            dispatch(productActions.setWomenProducts(womenProds));
         }
     }
 

@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Black TShirt 1",
         "price": 1000,
         "ratings": "3.4",
@@ -8,6 +9,7 @@
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
+        "id": 2,
         "name": "Black TShirt 2",
         "price": 1000,
         "ratings": "3.4",
@@ -16,6 +18,7 @@
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
+        "id": 3,
         "name": "Black TShirt 3",
         "price": 1000,
         "ratings": "3.4",
@@ -24,6 +27,7 @@
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
+        "id": 4,
         "name": "Black TShirt 4",
         "price": 1000,
         "ratings": "3.4",
@@ -32,6 +36,7 @@
         "imageUrl": "/prodImages/blacktshirt.jpg"
     },
     {
+        "id": 5,
         "name": "Black TShirt 5",
         "price": 1000,
         "ratings": "3.4",
