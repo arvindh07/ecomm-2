@@ -9,7 +9,7 @@ const ProductsHome = () => {
   if(!products) return null;
 
   return (
-    <div className="grid grid-cols-4">
+    <div className="col-span-8 grid grid-cols-4">
       {products?.map((prod: any) => {
         return (
           <Product product={prod} />
